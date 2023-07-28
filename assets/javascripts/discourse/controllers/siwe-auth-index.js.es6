@@ -17,12 +17,14 @@ export default Controller.extend({
   },
 
   async initAuth() {
+    localStorage.clear();
+
     const env = withPluginApi("0.11.7", (api) => {
       const siteSettings = api.container.lookup("site-settings:main");
 
       return {
         PROJECT_ID: siteSettings.siwe_project_id,
-      }
+      };
     });
     let provider = Web3Modal.create();
     await provider.providerInit(env);
@@ -39,6 +41,6 @@ export default Controller.extend({
   actions: {
     async initAuth() {
       this.initAuth();
-    }
-  }
+    },
+  },
 });
